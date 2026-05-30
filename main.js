@@ -11,7 +11,11 @@ app.get('/', (req , res)=>{
    message : "GitHub Profile Analyzer",
    version : "1.0.0",
    endpoints : {
-      
+      analyze:        "POST /api/profiles/analyze/:username",
+      getAllProfiles:  "GET  /api/profiles",
+      getProfile:     "GET  /api/profiles/:username",
+      deleteProfile:  "DELETE /api/profiles/:username",
+      compare:        "GET  /api/profiles/compare?users=user1,user2",  
    }
    });
 });
