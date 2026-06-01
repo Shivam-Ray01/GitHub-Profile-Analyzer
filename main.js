@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";  //cross origin resource sharing//
+import profileRoutes from "./routes/profileRoutes.js";
 
 const app = express();
 
@@ -18,4 +19,15 @@ app.get('/', (req , res)=>{
       compare:        "GET  /api/profiles/compare?users=user1,user2",  
    }
    });
+});
+
+app.use("/api/profiles", profileRoutes);
+
+app.use((req, res)=>{
+   res.status(404).json({success: false, message: "Routes Not Found"})
+});
+
+app.use((err, req, res, next)=>{
+   console.error("unhandled error:" , err.message);
+   res.status(500).json({success: false, message:'Internal server error'})
 });
