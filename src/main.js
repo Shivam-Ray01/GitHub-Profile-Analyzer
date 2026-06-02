@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";  //cross origin resource sharing//
 import profileRoutes from "./routes/profileRoutes.js";
+import { testConnection } from "./config/db.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
@@ -30,4 +33,12 @@ app.use((req, res)=>{
 app.use((err, req, res, next)=>{
    console.error("unhandled error:" , err.message);
    res.status(500).json({success: false, message:'Internal server error'})
+});
+
+const PORT = process.env.PORT || 3000;
+
+testConnection().then(()=>{
+    app.listen(PORT, () => {
+       console.log(`Server running on http://localhost:${PORT}`);
+    });
 });
