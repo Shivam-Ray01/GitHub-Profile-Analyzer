@@ -1,6 +1,5 @@
 const GITHUB_API = "https://api.github.com";
 
-
 function ErrorHandler(response, username){
         if (response.status === 404) {
         throw new Error(`GitHub User ${username} not found`);
