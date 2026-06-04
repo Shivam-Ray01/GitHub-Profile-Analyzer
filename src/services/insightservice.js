@@ -30,6 +30,24 @@ function calculateInsights(user, repos){
     if (user.blog) completnessScore += 10;
     if (user.twitter_username) completnessScore += 10;
 
-    
+const ownRepos = repos.filter(repo => !repo.fork);
+ const langCount = {};
+    ownRepos.forEach(repo => {
+        if (repo.language){
+            langCount[repo.language] = (langCount[repo.language] || 0) + 1;
+        }
+        
+    });
+const topLanguage = Object.entries( langCount).sort((a, b) => b[1] - a[1])[0]?.[0] || null; 
+
+    return {
+        accountAgeInDays: days,
+        averageReposPerYear: averageReposPerYear,
+        followersRatio: followersRatio,
+        popularityScore: popularityScore,
+        completnessScore: completnessScore,
+        topLanguage: topLanguage,
+        totalStars: totalStars
+    }
 
 }  export { calculateInsights };   
