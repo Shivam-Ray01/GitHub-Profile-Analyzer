@@ -7,7 +7,7 @@ function calculateInsights(user, repos){
     // calculating average repos a year //    
     const accountAgeInYears = (days / 365 ) || 1;
     const userRepos = user.public_repos;
-    const averageReposPerYear = userRepos / accountAgeInYears;
+    const averageReposPerYear = userRepos / accountAgeInYears;    
     // calculating followers ratios //  
     let followersRatio;    
     if (user.following === 0){
@@ -20,15 +20,15 @@ function calculateInsights(user, repos){
      let popularityScore;
      popularityScore = (user.followers *2) + (userRepos *1.5 ) + (totalStars * 3);
      
-    let completnessScore = 0;
-    if (user.name) completnessScore += 15;
-    if (user.bio) completnessScore += 20;
-    if (user.location) completnessScore += 15;
-    if (user.email) completnessScore += 15;
-    if (user.avatar_url) completnessScore += 5;
-    if (user.company) completnessScore += 10;
-    if (user.blog) completnessScore += 10;
-    if (user.twitter_username) completnessScore += 10;
+    let completenessScore = 0;
+    if (user.name) completenessScore += 15;
+    if (user.bio) completenessScore += 20;
+    if (user.location) completenessScore += 15;
+    if (user.email) completenessScore += 15;
+    if (user.avatar_url) completenessScore += 5;
+    if (user.company) completenessScore += 10;
+    if (user.blog) completenessScore += 10;
+    if (user.twitter_username) completenessScore += 10;
 
 const ownRepos = repos.filter(repo => !repo.fork);
  const langCount = {};
@@ -45,7 +45,7 @@ const topLanguage = Object.entries( langCount).sort((a, b) => b[1] - a[1])[0]?.[
         averageReposPerYear: averageReposPerYear,
         followersRatio: followersRatio,
         popularityScore: popularityScore,
-        completnessScore: completnessScore,
+        completenessScore: completenessScore,
         topLanguage: topLanguage,
         totalStars: totalStars
     }
