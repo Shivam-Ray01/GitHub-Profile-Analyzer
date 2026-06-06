@@ -69,4 +69,42 @@ return result;
        } catch(error) {
              throw new Error (`Database error ${error.message}`);
        }
-}
+}  
+
+    async function getAllProfiles (){
+        try {
+           const sql = `SELECT * FROM profiles ORDER BY analyzed_at DESC`;
+           const [rows] = await pool.execute(sql);
+           return rows;
+        }  catch (error) {
+            throw new Error (`Database error ${error.message}`);
+        
+        }
+    }
+
+    async function getProfileByUsername(username){
+        try {
+           const sql = `SELECT * FROM profiles WHERE username = ?`;
+           const [rows] = await pool.execute(sql, [username]);
+           if (rows.length===0){
+            return null;
+           } else {
+            return rows[0]
+           }
+        } catch (error) {
+           throw new Error (`Database error ${error.message}`);
+        }
+    }
+
+    async function deleteProfile(username){
+        try {
+            const sql = `DELETE FROM profiles WHERE username = ?`;
+            const [result] = await pool.execute(sql, [username]);
+            return result.affectedRows;
+        } catch (error) {
+          throw new Error (`Database Erro ${error.message}`);
+        }
+    }
+
+    export {upsertProfile, saveReposSnapshots, getAllProfiles, getProfileByUsername, deleteProfile}
+    
