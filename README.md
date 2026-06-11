@@ -50,56 +50,13 @@ github-profile-analyzer/
 - Node.js v18 or higher
 - MySQL 8.0 or higher
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/yourusername/github-profile-analyzer.git
-cd github-profile-analyzer
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Configure environment variables
-
-Create a `.env` file in the root directory:
-
-```env
-PORT=3000
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_mysql_password
-DB_NAME=github_analyzer
-```
-
-### 4. Setup the database
-
-```bash
-npm run db:setup
-```
-
-### 5. Start the server
-
-```bash
-# Development
-npm run dev
-
-# Production
-npm start
-```
-
-Server will run at `http://localhost:3000`
-
 ## API Endpoints
 
 ### Analyze a GitHub profile
 Fetches data from GitHub, calculates insights, and stores in database.
 
 **Example:**
-POST /api/profiles/analyze/torvalds
+POST /api/profiles/analyze/${username}
 ---
 
 ### Get all analyzed profiles
